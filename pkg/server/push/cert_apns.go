@@ -23,8 +23,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/SkygearIO/buford/push"
+	"github.com/inizio/buford/push"
+	"github.com/sirupsen/logrus"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
 )
 
@@ -180,7 +180,7 @@ func (pusher *certBasedAPNSPusher) Send(m Mapper, device skydb.Device) error {
 	if err != nil {
 		if pushError, ok := err.(*push.Error); ok && pushError != nil {
 			// We recognize the error, and that error comes from APNS
-			pushLogger := logger.WithFields(logrus.Fields{
+			pushLogger := log.WithFields(logrus.Fields{
 				"apnsErrorReason":    pushError.Reason,
 				"apnsErrorStatus":    pushError.Status,
 				"apnsErrorTimestamp": pushError.Timestamp,
@@ -190,16 +190,16 @@ func (pusher *certBasedAPNSPusher) Send(m Mapper, device skydb.Device) error {
 				pushLogger.Info("push/apns: device token is no longer valid")
 				queueFailedNotification(pusher, device.Token, *pushError)
 			} else {
-				pushLogger.Error("push/apns: failed to send push notification")
+				pushLogger.Warn("push/apns: failed to send push notification")
 			}
 			return err
 		}
 
-		logger.Errorf("Failed to send push notification: %s", err)
+		log.Warnf("Failed to send push notification: %s", err)
 		return err
 	}
 
-	logger.WithFields(logrus.Fields{
+	log.WithFields(logrus.Fields{
 		"apnsID": apnsid,
 	}).Info("push/apns: push notification is sent")
 

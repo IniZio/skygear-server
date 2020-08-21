@@ -91,11 +91,11 @@ func (p *FCMPusher) Send(m Mapper, device skydb.Device) error {
 
 	response, err := client.Send(&message)
 	if err != nil {
-		log.Errorf("fcm: failed to call message api: %v", response)
+		log.Warnf("fcm: failed to call message api: %v", response)
 		return err
 	}
 
-	log.Info("fcm: push notification is sent: %v", response)
+	log.Infof("fcm: push notification is sent: %v", response)
 
 	return nil
 }

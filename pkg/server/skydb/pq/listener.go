@@ -22,9 +22,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
+	"github.com/sirupsen/logrus"
 
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
 )
@@ -114,14 +114,14 @@ func (l *recordListener) Listen() {
 	for {
 		select {
 		case pqNotification := <-listener.Notify:
-			log.WithField("pqNotification", pqNotification).Infoln("Received a notify")
+			pushLog.WithField("pqNotification", pqNotification).Infoln("Received a notify")
 
 			n := notification{}
 			if err := l.fetchNotification(pqNotification.Extra, &n); err != nil {
-				log.WithFields(logrus.Fields{
+				pushLog.WithFields(logrus.Fields{
 					"pqNotification": pqNotification,
 					"err":            err,
-				}).Errorln("pq/listener: failed to fetch notification")
+				}).Warnf("pq/listener: failed to fetch notification")
 
 				continue
 			}
@@ -145,10 +145,10 @@ func (l *recordListener) fetchNotification(notificationID string, n *notificatio
 	err := l.db.QueryRowx("SELECT op, appname, recordtype, record FROM public.pending_notification WHERE id = $1", notificationID).
 		StructScan(&rawNoti)
 	if err != nil {
-		log.WithFields(logrus.Fields{
+		pushLog.WithFields(logrus.Fields{
 			"notificationID": notificationID,
 			"err":            err,
-		}).Errorln("Failed to fetch pending notification")
+		}).Warnf("Failed to fetch pending notification")
 		return err
 	}
 
@@ -162,10 +162,10 @@ func (l *recordListener) fetchNotification(notificationID string, n *notificatio
 func (l *recordListener) deleteNotification(notificationID string) {
 	result, err := l.db.Exec("DELETE FROM public.pending_notification WHERE id = $1", notificationID)
 	if err != nil {
-		log.WithFields(logrus.Fields{
+		pushLog.WithFields(logrus.Fields{
 			"notificationID": notificationID,
 			"err":            err,
-		}).Errorln("Failed to delete notification")
+		}).Warnf("Failed to delete notification")
 
 		return
 	}
@@ -176,16 +176,16 @@ func (l *recordListener) deleteNotification(notificationID string) {
 			"notificationID": notificationID,
 			"err":            err,
 			"rowsAffected":   rowsAffected,
-		}).Errorln("More than one notification deleted")
+		}).Warnf("More than one notification deleted")
 
 		return
 	}
 
 	if rowsAffected != 1 {
-		log.WithFields(logrus.Fields{
+		pushLog.WithFields(logrus.Fields{
 			"notificationID": notificationID,
 			"rowsAffected":   rowsAffected,
-		}).Errorln("Zero or more than one notification deleted")
+		}).Warnf("Zero or more than one notification deleted")
 	}
 }
 

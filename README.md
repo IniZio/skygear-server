@@ -107,7 +107,7 @@ $ brew install libsodium zeromq czmq
 ```shell
 $ go get github.com/Masterminds/glide
 $ make vendor
-$ # export WITH_ZMQ=1 # If you need ZeroMQ support
+$ export WITH_ZMQ=1 # If you need ZeroMQ support
 $ make build
 ```
 

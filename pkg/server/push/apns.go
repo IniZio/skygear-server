@@ -19,8 +19,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/SkygearIO/buford/push"
+	"github.com/inizio/buford/push"
+	"github.com/sirupsen/logrus"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
 )
 

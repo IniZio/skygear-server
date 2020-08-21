@@ -16,6 +16,7 @@ package push
 
 import (
 	"fmt"
+
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
 	"gopkg.in/maddevsio/fcm.v1"
 )
@@ -59,7 +60,7 @@ func (p *LegacyFCMPusher) Send(m Mapper, device skydb.Device) error {
 
 	c, _ := createFCMLegacyHTTPPushClient(p.APIKey)
 	if _, err := c.Send(message); err != nil {
-		log.Errorf("fcm/key: failed to send fcm Notification: %v", err)
+		log.Warnf("fcm/key: failed to send fcm Notification: %v", err)
 		return err
 	}
 

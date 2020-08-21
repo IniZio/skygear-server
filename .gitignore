@@ -18,3 +18,5 @@ docker-compose.override.yml
 
 # nix
 result-bin
+
+/skygear-server
