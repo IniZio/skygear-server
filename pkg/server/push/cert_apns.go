@@ -23,9 +23,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/SkygearIO/buford/push"
+	"github.com/inizio/buford/push"
+	"github.com/skygeario/skygear-server/pkg/server/logging"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
+	"github.com/sirupsen/logrus"
 )
 
 type certBasedAPNSPusher struct {

@@ -27,7 +27,7 @@ GO_BUILD_ARGS := $(GO_BUILD_TAGS) $(GO_BUILD_LDFLAGS)
 
 .PHONY: vendor
 vendor:
-	$(DOCKER_RUN) glide install
+	$(DOCKER_RUN) go mod vendor
 
 .PHONY: generate
 generate:

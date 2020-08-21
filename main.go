@@ -23,10 +23,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/evalphobia/logrus_sentry"
 	"github.com/facebookgo/inject"
+	"github.com/inizio/logrus_sentry"
 	"github.com/robfig/cron"
+	"github.com/sirupsen/logrus"
 
 	"github.com/skygeario/skygear-server/pkg/server/asset"
 	"github.com/skygeario/skygear-server/pkg/server/authtoken"

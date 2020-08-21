@@ -25,10 +25,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/Sirupsen/logrus"
-	"github.com/SkygearIO/buford/push"
 	jwt "github.com/dgrijalva/jwt-go"
+	"github.com/inizio/buford/push"
+	"github.com/skygeario/skygear-server/pkg/server/logging"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
+	"github.com/sirupsen/logrus"
 )
 
 const tokenRefreshInterval = 30 * time.Minute

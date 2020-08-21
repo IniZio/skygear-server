@@ -16,6 +16,8 @@ package push
 
 import (
 	"fmt"
+
+	"github.com/skygeario/skygear-server/pkg/server/logging"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
 	"gopkg.in/maddevsio/fcm.v1"
 )

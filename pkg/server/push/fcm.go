@@ -21,8 +21,9 @@ import (
 
 	firebase "firebase.google.com/go"
 	"firebase.google.com/go/messaging"
-	"github.com/mitchellh/mapstructure"
+	"github.com/skygeario/skygear-server/pkg/server/logging"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
+	"github.com/mitchellh/mapstructure"
 	"google.golang.org/api/option"
 )
 

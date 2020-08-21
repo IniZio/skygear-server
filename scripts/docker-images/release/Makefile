@@ -3,9 +3,9 @@ GIT_SHORT_SHA := $(shell git rev-parse --short HEAD)
 VERSION := $(shell git describe --always --tags)
 BUILD_DATE := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-DOCKER_REGISTRY := 
-DOCKER_ORG_NAME := skygeario
-DOCKER_IMAGE := skygear-server
+DOCKER_REGISTRY :=
+DOCKER_ORG_NAME := inizio
+DOCKER_IMAGE := village-skygear-server
 DOCKER_TAG := git-$(shell git rev-parse --short HEAD)
 PUSH_DOCKER_TAG := $(VERSION)
 
@@ -36,4 +36,3 @@ docker-push:
 docker-push-version:
 	docker tag $(IMAGE_NAME) $(DOCKER_REGISTRY)$(DOCKER_ORG_NAME)/$(DOCKER_IMAGE):$(PUSH_DOCKER_TAG)
 	docker push $(DOCKER_REGISTRY)$(DOCKER_ORG_NAME)/$(DOCKER_IMAGE):$(PUSH_DOCKER_TAG)
-
