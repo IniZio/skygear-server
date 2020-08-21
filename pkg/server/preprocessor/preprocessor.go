@@ -70,7 +70,7 @@ func (p InjectUserIfPresent) Preprocess(payload *router.Payload, response *route
 				return http.StatusInternalServerError
 			}
 		} else {
-			log.Errorf("Cannot find UserInfo.ID = %#v\n", payload.UserInfoID)
+			log.Warnf("Cannot find UserInfo.ID = %#v\n", payload.UserInfoID)
 			response.Err = skyerr.NewError(skyerr.UnexpectedUserInfoNotFound, err.Error())
 			return http.StatusInternalServerError
 		}
