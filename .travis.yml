@@ -29,12 +29,12 @@ before_install:
   - popd
 
 install:
-  - sudo apt-get install -y postgresql-9.5-postgis-2.3
+  - sudo apt-get install -y postgresql-9.5-postgis-2.3 postgresql-9.5-postgis-2.3-scripts
   - go mod vendor
 
 before_script:
   - psql -c 'CREATE DATABASE skygear_test;' -U postgres
-  - psql -c 'CREATE EXTENSION postgis;' -U postgres -d skygear_test
+  - psql -c 'CREATE EXTENSION postgis with version "2.3";' -U postgres -d skygear_test
   - >
     go get golang.org/x/tools/cmd/stringer \
            golang.org/x/tools/cmd/cover \

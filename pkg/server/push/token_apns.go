@@ -27,9 +27,8 @@ import (
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/inizio/buford/push"
-	"github.com/skygeario/skygear-server/pkg/server/logging"
-	"github.com/skygeario/skygear-server/pkg/server/skydb"
 	"github.com/sirupsen/logrus"
+	"github.com/skygeario/skygear-server/pkg/server/skydb"
 )
 
 const tokenRefreshInterval = 30 * time.Minute
@@ -227,12 +226,12 @@ func (pusher *tokenBasedAPNSPusher) Send(m Mapper, device skydb.Device) error {
 				pushLogger.Info("push/apns: device token is no longer valid")
 				queueFailedNotification(pusher, device.Token, *pushError)
 			} else {
-				pushLogger.Error("push/apns: failed to send push notification")
+				pushLogger.Warn("push/apns: failed to send push notification")
 			}
 			return err
 		}
 
-		logger.Errorf("Failed to send push notification: %s", err)
+		logger.Warnf("Failed to send push notification: %s", err)
 		return err
 	}
 

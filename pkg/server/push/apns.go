@@ -20,9 +20,8 @@ import (
 	"time"
 
 	"github.com/inizio/buford/push"
-	"github.com/skygeario/skygear-server/pkg/server/logging"
-	"github.com/skygeario/skygear-server/pkg/server/skydb"
 	"github.com/sirupsen/logrus"
+	"github.com/skygeario/skygear-server/pkg/server/skydb"
 )
 
 // GatewayType determine which kind of gateway should be used for APNS

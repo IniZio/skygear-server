@@ -24,12 +24,9 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 
-	"github.com/skygeario/skygear-server/pkg/server/logging"
 	"github.com/skygeario/skygear-server/pkg/server/skydb"
 	"github.com/skygeario/skygear-server/pkg/server/skydb/pq/migration"
 )
-
-var log = logging.LoggerEntry("skydb")
 
 var underscoreRe = regexp.MustCompile(`[.:]`)
 
