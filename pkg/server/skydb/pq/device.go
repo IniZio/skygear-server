@@ -61,10 +61,10 @@ func (c *conn) QueryDevicesByUser(user string) ([]skydb.Device, error) {
 		Where("user_id = ?", user)
 
 	rows, err := c.QueryWith(builder)
-	if err != nil {
-		panic(err)
-	}
 	defer rows.Close()
+	if err != nil {
+		return nil, err
+	}
 	results := []skydb.Device{}
 	for rows.Next() {
 		nullableToken := sql.NullString{}
@@ -78,7 +78,9 @@ func (c *conn) QueryDevicesByUser(user string) ([]skydb.Device, error) {
 			&nullableTopic,
 			&d.LastRegisteredAt); err != nil {
 
-			panic(err)
+			if err != nil {
+				return nil, err
+			}
 		}
 		d.Token = nullableToken.String
 		d.Topic = nullableTopic.String
