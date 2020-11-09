@@ -61,7 +61,9 @@ func (c *conn) QueryDevicesByUser(user string) ([]skydb.Device, error) {
 		Where("user_id = ?", user)
 
 	rows, err := c.QueryWith(builder)
-	defer rows.Close()
+	if rows != nil {
+		defer rows.Close()
+	}
 	if err != nil {
 		return nil, err
 	}
